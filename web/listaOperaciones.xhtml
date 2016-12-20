@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Operaciones del aviso</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h:dataTable value="#{operacionesBean.getListaOperaciones(avisosBean.avisoSeleccionado)}" var="operacion" border="1">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>
+                        <h:outputText value="#{operacion.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descripción"/>
+                        </f:facet>
+                        <h:outputText value="#{operacion.descripcion}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha"/>
+                        </f:facet>
+                        <h:outputText value="#{operacion.fecha}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Operaciones"/>
+                        </f:facet>
+                        <h:commandButton action="#{operacionesBean.doEditar(operacion)}" value="Editar" />
+                        <h:commandButton action="#{operacionesBean.doBorrar(operacion)}" value="Borrar" />
+                    </h:column>
+                    
+                </h:dataTable>
+                <h:commandButton action="#{operacionesBean.doCrear()}" value="Crear operación" />
+                <h:commandButton action="listaAvisos?faces-redirect=true" value="Volver" />
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+
