@@ -10,7 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
-import jersey.clienteJerseyUsuario;
+import jersey.UsuarioJersey;
 import rest.ejb.Usuario;
 
 /**
@@ -20,7 +20,7 @@ import rest.ejb.Usuario;
 @ManagedBean
 @SessionScoped
 public class UsuarioBean {
-    private clienteJerseyUsuario usuarioJersey;
+    private UsuarioJersey usuarioJersey;
     private Usuario usuario;
     
     /**
@@ -31,7 +31,7 @@ public class UsuarioBean {
     
     @PostConstruct
     public void init() {
-        usuarioJersey = new clienteJerseyUsuario();
+        usuarioJersey = new UsuarioJersey();
         usuario = find("Ejemplo@correo.com");
     }
 

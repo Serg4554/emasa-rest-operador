@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.ws.WebServiceRef;
-import jersey.clienteJerseyOperacion;
+import jersey.OperacionJersey;
 import rest.ejb.Aviso;
 import rest.ejb.Operacion;
 import rest.ejb.Usuario;
@@ -39,7 +39,7 @@ public class OperacionesBean {
     @ManagedProperty(value="#{avisosBean}")
     private AvisosBean avisosBean;
     
-    private clienteJerseyOperacion operacionJersey;
+    private OperacionJersey operacionJersey;
     private String error;
     private Operacion operacionSeleccionada;
     private String fecha;
@@ -52,7 +52,7 @@ public class OperacionesBean {
     
     @PostConstruct
     public void init() {
-        operacionJersey = new clienteJerseyOperacion();
+        operacionJersey = new OperacionJersey();
         error = "";
     }
 
@@ -166,7 +166,7 @@ public class OperacionesBean {
     }
 
     private void edit(Operacion entity) {
-        operacionJersey.edit_JSON(entity, ""+entity.getId()); //NO SE ESTÁ USANDO EL ID
+        operacionJersey.edit_JSON(entity);
     }
 
     private void remove(Operacion entity) {

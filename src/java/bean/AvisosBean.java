@@ -15,7 +15,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
-import jersey.clienteJerseyAviso;
+import jersey.AvisoJersey;
 import rest.ejb.Aviso;
 import rest.ejb.Operacion;
 
@@ -30,7 +30,7 @@ public class AvisosBean {
     @ManagedProperty(value="#{usuarioBean}")
     private UsuarioBean usuarioBean;
     
-    private clienteJerseyAviso avisoJersey;
+    private AvisoJersey avisoJersey;
     private Aviso avisoSeleccionado;
     private String prioridad;
     private String inicioReparacion;
@@ -47,7 +47,7 @@ public class AvisosBean {
     
     @PostConstruct
     public void init() {
-        avisoJersey = new clienteJerseyAviso();
+        avisoJersey = new AvisoJersey();
         error = "";
     }
     
@@ -266,7 +266,7 @@ public class AvisosBean {
     private java.util.List<Aviso> findAll() {
         List<Aviso> listaAvisos = null;
         
-        Response r = avisoJersey.findAll_JSON(Response.class);
+        Response r = avisoJersey.findAll(Response.class);
         if (r.getStatus() == 200) {
             GenericType<List<Aviso>> genericType = new GenericType<List<Aviso>>() {
             };
@@ -285,6 +285,6 @@ public class AvisosBean {
     }
 
     private void edit(Aviso entity) {
-        avisoJersey.edit_JSON(entity, ""+entity.getId()); //NO SE ESTÁ USANDO EL ID
+        avisoJersey.edit_JSON(entity);
     }
 }
