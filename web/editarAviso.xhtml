@@ -3,33 +3,78 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Nuevo aviso</title>
         <link rel="stylesheet" type="text/css" href="includes/style/main.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- Compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+        <!-- Compiled and minified Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <!-- Font Awesome -->
+        <script src="https://use.fontawesome.com/26be38d20f.js"></script>
     </h:head>
     <h:body>
         <ui:include src="/includes/header.xhtml" />
         <h:panelGroup layout="block" id="content">
             <h:form>
                 <h:outputText id="error" style="color: red;" value="#{avisosBean.error}" /> <br/>
-
-                Ubicación <h:inputText maxlength="500" value="#{avisosBean.avisoSeleccionado.ubicacion}" /> <br/>
-                Estado <h:inputText maxlength="50" value="#{avisosBean.avisoSeleccionado.estado}" /> <br/>
-                Observaciones <h:inputText maxlength="10000" value="#{avisosBean.avisoSeleccionado.observaciones}" /> <br/>
-                Ubicación técnica <h:inputText maxlength="1000" value="#{avisosBean.avisoSeleccionado.ubicacionTecnica}" /> <br/>
-                Prioridad <h:inputText maxlength="1" value="#{avisosBean.prioridad}" /> <br/>
-                Inicio reparación <h:inputText value="#{avisosBean.inicioReparacion}" /> <br/>
-                Fin reparación <h:inputText value="#{avisosBean.finReparacion}" /> <br/>
-                Posición GPS
-                <h:inputText a:placeholder="Latitud" value="#{avisosBean.latitudGPS}" />
-                <h:inputText a:placeholder="Longitud" value="#{avisosBean.longitudGPS}" /> <br/>
-                Tipo <h:inputText maxlength="100" value="#{avisosBean.avisoSeleccionado.tipo}" /> <br/>
-                <h:commandButton value="Guardar" action="#{avisosBean.doGuardar()}">
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 500px">
+                    <span class="input-group-addon">Ubicación</span>
+                    <h:inputText maxlength="500" value="#{avisosBean.avisoSeleccionado.ubicacion}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 500px">
+                    <span class="input-group-addon">Estado</span>
+                    <h:inputText maxlength="50" value="#{avisosBean.avisoSeleccionado.estado}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 500px">
+                    <span class="input-group-addon">Observaciones</span>
+                    <h:inputText maxlength="10000" value="#{avisosBean.avisoSeleccionado.observaciones}" class="form-control" /> <br/>
+                </h:panelGroup> <br/>
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 500px">
+                    <span class="input-group-addon">Ubicación técnica</span>
+                    <h:inputText maxlength="1000" value="#{avisosBean.avisoSeleccionado.ubicacionTecnica}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 500px">
+                    <span class="input-group-addon">Prioridad</span>
+                    <h:inputText maxlength="1" value="#{avisosBean.prioridad}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 500px">
+                    <span class="input-group-addon">Inicio reparación</span>
+                    <h:inputText value="#{avisosBean.inicioReparacion}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 500px">
+                    <span class="input-group-addon">Fin reparación</span>
+                    <h:inputText value="#{avisosBean.finReparacion}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 200px">
+                    <span class="input-group-addon">Latitud GPS</span>
+                    <h:inputText value="#{avisosBean.latitudGPS}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 200px">
+                    <span class="input-group-addon">Longitud GPS</span>
+                    <h:inputText value="#{avisosBean.longitudGPS}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 500px">
+                    <span class="input-group-addon">Tipo</span>
+                    <h:inputText maxlength="100" value="#{avisosBean.avisoSeleccionado.tipo}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:commandButton value="Guardar" action="#{avisosBean.doGuardar()}" class="btn btn-success" >
                     <f:ajax execute="@form" render="error"/>
                 </h:commandButton>
-                <h:commandButton action="listaAvisos?faces-redirect=true" value="Volver" />
+                <h:commandButton style="margin-left: 10px;" action="listaAvisos?faces-redirect=true" value="Volver" class="btn btn-default" />
             </h:form>
         </h:panelGroup>
     </h:body>

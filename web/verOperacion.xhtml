@@ -6,14 +6,22 @@
     <h:head>
         <title>Operacion #{operacionesBean.operacionSeleccionada.id}</title>
         <link rel="stylesheet" type="text/css" href="includes/style/main.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- Compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+        <!-- Compiled and minified Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <!-- Font Awesome -->
+        <script src="https://use.fontawesome.com/26be38d20f.js"></script>
     </h:head>
     <h:body>
         <ui:include src="/includes/header.xhtml" />
         <h:panelGroup layout="block" id="content">
             <h:form>
-                Descripción: #{operacionesBean.operacionSeleccionada.descripcion} <br/>
-                Fecha: #{operacionesBean.fecha} <br/>
-                <h:commandButton action="listaOperaciones?faces-redirect=true" value="Volver" />
+                <b>Descripción:</b> #{operacionesBean.operacionSeleccionada.descripcion} <br/>
+                <b>Fecha:</b> #{operacionesBean.fecha} <br/>
+                <br/>
+                <h:commandButton action="listaOperaciones?faces-redirect=true" value="Volver" class="btn btn-default" />
             </h:form>
         </h:panelGroup>
     </h:body>

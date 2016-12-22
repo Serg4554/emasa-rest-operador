@@ -6,24 +6,35 @@
     <h:head>
         <title>Aviso #{avisosBean.avisoSeleccionado.id}</title>
         <link rel="stylesheet" type="text/css" href="includes/style/main.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- Compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+        <!-- Compiled and minified Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <!-- Font Awesome -->
+        <script src="https://use.fontawesome.com/26be38d20f.js"></script>
     </h:head>
     <h:body>
         <ui:include src="/includes/header.xhtml" />
         <h:panelGroup layout="block" id="content">
             <h:form>
-                ID: #{avisosBean.avisoSeleccionado.id} <br/>
-                Ubicación: #{avisosBean.avisoSeleccionado.ubicacion} <br/>
-                Estado: #{avisosBean.avisoSeleccionado.estado} <br/>
-                Observaciones: #{avisosBean.avisoSeleccionado.observaciones}<br/>
-                Ubicación técnica: #{avisosBean.avisoSeleccionado.ubicacionTecnica} <br/>
-                Prioridad: #{avisosBean.prioridad} <br/>
-                Inicio reparación: #{avisosBean.inicioReparacion} <br/>
-                Fin reparación: #{avisosBean.finReparacion} <br/>
-                Posición GPS:
+                <h3>Datos</h3>
+                <b>ID:</b> #{avisosBean.avisoSeleccionado.id} <br/>
+                <b>Ubicación:</b> #{avisosBean.avisoSeleccionado.ubicacion} <br/>
+                <b>Estado:</b> #{avisosBean.avisoSeleccionado.estado} <br/>
+                <b>Observaciones:</b> #{avisosBean.avisoSeleccionado.observaciones}<br/>
+                <b>Ubicación técnica:</b> #{avisosBean.avisoSeleccionado.ubicacionTecnica} <br/>
+                <b>Prioridad:</b> #{avisosBean.prioridad} <br/>
+                <b>Inicio reparación:</b> #{avisosBean.inicioReparacion} <br/>
+                <b>Fin reparación:</b> #{avisosBean.finReparacion} <br/>
+                <b>Posición GPS:</b>
                 #{avisosBean.latitudGPS} ; 
                 #{avisosBean.longitudGPS} <br/>
-                Tipo: #{avisosBean.avisoSeleccionado.tipo} <br/>
-                <h:commandButton action="listaAvisos?faces-redirect=true" value="Volver" />
+                <b>Tipo:</b> #{avisosBean.avisoSeleccionado.tipo} <br/>
+                <h3>Mapa</h3>
+                AQUÍ IRÁ EL MAPA <br/>
+                <br/>
+                <h:commandButton action="listaAvisos?faces-redirect=true" value="Volver" class="btn btn-default" />
             </h:form>
         </h:panelGroup>
     </h:body>

@@ -7,6 +7,13 @@
     <h:head>
         <title>Editar operacion</title>
         <link rel="stylesheet" type="text/css" href="includes/style/main.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- Compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+        <!-- Compiled and minified Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <!-- Font Awesome -->
+        <script src="https://use.fontawesome.com/26be38d20f.js"></script>
     </h:head>
     <h:body>
         <ui:include src="/includes/header.xhtml" />
@@ -14,13 +21,20 @@
             <h:form>
                 <h:outputText id="error" style="color: red;" value="#{operacionesBean.error}" /> <br/>
 
-                Descripción <h:inputText maxlength="500" value="#{operacionesBean.operacionSeleccionada.descripcion}" /> <br/>
-                Fecha
-                <h:inputText value="#{operacionesBean.fecha}" /> <br/>
-                <h:commandButton value="Guardar" action="#{operacionesBean.doGuardar()}">
+                <h:panelGroup layout="block" class="input-group" style="width: 500px">
+                    <span class="input-group-addon">Descripción</span>
+                    <h:inputText maxlength="500" value="#{operacionesBean.operacionSeleccionada.descripcion}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:panelGroup layout="block" class="input-group" style="width: 500px">
+                    <span class="input-group-addon">Fecha</span>
+                    <h:inputText value="#{operacionesBean.fecha}" class="form-control" />
+                </h:panelGroup> <br/>
+                
+                <h:commandButton value="Guardar" action="#{operacionesBean.doGuardar()}" class="btn btn-success">
                     <f:ajax execute="@form" render="error"/>
                 </h:commandButton>
-                <h:commandButton action="listaOperaciones?faces-redirect=true" value="Volver" />
+                <h:commandButton style="margin-left: 10px;" action="listaOperaciones?faces-redirect=true" value="Volver" class="btn btn-default" />
             </h:form>
         </h:panelGroup>
     </h:body>
