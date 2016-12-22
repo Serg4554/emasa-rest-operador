@@ -2,18 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Operaciones del aviso</title>
-        <link rel="stylesheet" type="text/css" href="style/style.css" />
+        <link rel="stylesheet" type="text/css" href="includes/style/main.css" />
     </h:head>
     <h:body>
-        <h:panelGroup layout="block" id="header">
-            <h:graphicImage value="images/emasa.png" height="30" id="headerLogo" />
-            <h:panelGroup layout="block" id="headerContent">
-                Panel operador
-            </h:panelGroup>
-        </h:panelGroup>
+        <ui:include src="/includes/header.xhtml" />
         <h:panelGroup layout="block" id="content">
             <f:view>
                 <h:form>
@@ -50,7 +46,6 @@
                     </h:dataTable>
                     <h:commandButton action="#{operacionesBean.doCrear()}" value="Crear operación" />
                     <h:commandButton action="listaAvisos?faces-redirect=true" value="Volver" />
-
                 </h:form>
             </f:view>
         </h:panelGroup>

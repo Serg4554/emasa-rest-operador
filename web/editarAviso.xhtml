@@ -3,18 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Nuevo aviso</title>
-        <link rel="stylesheet" type="text/css" href="style/style.css" />
+        <link rel="stylesheet" type="text/css" href="includes/style/main.css" />
     </h:head>
     <h:body>
-        <h:panelGroup layout="block" id="header">
-            <h:graphicImage value="images/emasa.png" height="30" id="headerLogo" />
-            <h:panelGroup layout="block" id="headerContent">
-                Panel operador
-            </h:panelGroup>
-        </h:panelGroup>
+        <ui:include src="/includes/header.xhtml" />
         <h:panelGroup layout="block" id="content">
             <h:form>
                 <h:outputText id="error" style="color: red;" value="#{avisosBean.error}" /> <br/>
