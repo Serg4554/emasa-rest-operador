@@ -12,9 +12,7 @@
 
             Descripción <h:inputText maxlength="500" value="#{operacionesBean.operacionSeleccionada.descripcion}" /> <br/>
             Fecha
-            <h:inputText value="#{operacionesBean.fecha}">
-                <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET" />
-            </h:inputText> <br/>
+            <h:inputText value="#{operacionesBean.fecha}" /> <br/>
             <h:commandButton value="Guardar" action="#{operacionesBean.doGuardar()}">
                 <f:ajax execute="@form" render="error"/>
             </h:commandButton>
