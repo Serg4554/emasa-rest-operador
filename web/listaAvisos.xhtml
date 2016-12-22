@@ -3,7 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+          
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Lista de avisos</title>
         <link rel="stylesheet" type="text/css" href="includes/style/main.css" />
@@ -14,6 +17,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <!-- Font Awesome -->
         <script src="https://use.fontawesome.com/26be38d20f.js"></script>
+        
     </h:head>
     <h:body>
         <ui:include src="/includes/header.xhtml" />
@@ -117,7 +121,22 @@
                             </h:panelGroup>
                         </h:column>
                     </h:dataTable>
-                    <h:commandButton action="#{avisosBean.doCrear()}" value="Crear aviso" class="btn btn-success" />
+                    
+                    <h:commandButton action="#{avisosBean.doCrear()}" value="Crear aviso" class="btn btn-success" /><br/>
+                    <script type="text/javascript"
+                            charset="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2RpStrikgb975QOCkSfTcrt9ufzlVeBU">
+                    </script>
+                    <h:form id="form">
+                        #{avisosBean.enRadio()}
+                    <m:map width="500" height="450px" latitude="#{avisosBean.latitudGPSOperador}" longitude="#{avisosBean.longitudGPSOperador}"  enableScrollWheelZoom="true" >
+                        <c:forEach  items="#{avisosBean.avisosEnRadio}" var="aviso"> 
+                            
+                            <m:marker>
+                                <m:htmlInformationWindow htmlText="&lt;b&gt;ID:&lt;/b&gt; #{aviso.id}&lt;br/&gt; &lt;b&gt;Prioridad:&lt;/b&gt;#{aviso.prioridad}&lt;br/&gt; &lt;b&gt;Tipo:&lt;/b&gt; #{aviso.tipo}&lt;br/&gt; &lt;b&gt;Observaciones:&lt;/b&gt; #{aviso.observaciones}"/>
+                            </m:marker>
+                        </c:forEach>
+                        </m:map>
+                    </h:form>
                 </h:form>
             </f:view>
         </h:panelGroup>

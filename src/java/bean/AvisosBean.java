@@ -7,6 +7,7 @@ package bean;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -25,10 +26,10 @@ import rest.ejb.Aviso;
 @ManagedBean
 @SessionScoped
 public class AvisosBean {
-    
-    @ManagedProperty(value="#{usuarioBean}")
+
+    @ManagedProperty(value = "#{usuarioBean}")
     private UsuarioBean usuarioBean;
-    
+
     private AvisoJersey avisoJersey;
     private Aviso avisoSeleccionado;
     private String prioridad;
@@ -37,19 +38,48 @@ public class AvisosBean {
     private String latitudGPS;
     private String longitudGPS;
     private String error;
-    
+    public static final double R = 6372.8;
+    private List<Aviso> avisosEnRadio;
+    private String latitudGPSOperador;
+    private String longitudGPSOperador;
+
+    public String getLatitudGPSOperador() {
+        return latitudGPSOperador;
+    }
+
+    public void setLatitudGPSOperador(String latitudGPSOperador) {
+        this.latitudGPSOperador = latitudGPSOperador;
+    }
+
+    public String getLongitudGPSOperador() {
+        return longitudGPSOperador;
+    }
+
+    public void setLongitudGPSOperador(String longitudGPSOperador) {
+        this.longitudGPSOperador = longitudGPSOperador;
+    }
+
+    public List<Aviso> getAvisosEnRadio() {
+        return avisosEnRadio;
+    }
+
+    public void setAvisosEnRadio(List<Aviso> avisosEnRadio) {
+        this.avisosEnRadio = avisosEnRadio;
+    }
+
     /**
      * Creates a new instance of listaAvisosBean
      */
     public AvisosBean() {
     }
-    
+
     @PostConstruct
     public void init() {
+        
         avisoJersey = new AvisoJersey();
         error = "";
     }
-    
+
     public List<Aviso> getListaAvisos() {
         return findAll();
     }
@@ -109,7 +139,7 @@ public class AvisosBean {
     public void setUsuarioBean(UsuarioBean usuarioBean) {
         this.usuarioBean = usuarioBean;
     }
-    
+
     public String doCrear() {
         setAvisoSeleccionado(new Aviso());
         error = "";
@@ -120,33 +150,33 @@ public class AvisosBean {
         longitudGPS = null;
         return "editarAviso";
     }
-    
+
     public String doEditar(Aviso aviso) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
         formatter.applyPattern("dd-MM-yyyy");
-        
+
         setAvisoSeleccionado(aviso);
         error = "";
-        
-        if(avisoSeleccionado.getPrioridad() != null) {
-            prioridad = ""+avisoSeleccionado.getPrioridad();
+
+        if (avisoSeleccionado.getPrioridad() != null) {
+            prioridad = "" + avisoSeleccionado.getPrioridad();
         } else {
             prioridad = null;
         }
-        
-        if(avisoSeleccionado.getInicioReparacion() != null) {
+
+        if (avisoSeleccionado.getInicioReparacion() != null) {
             inicioReparacion = formatter.format(avisoSeleccionado.getInicioReparacion());
         } else {
             inicioReparacion = null;
         }
-        
-        if(avisoSeleccionado.getFinReparacion() != null) {
+
+        if (avisoSeleccionado.getFinReparacion() != null) {
             finReparacion = formatter.format(avisoSeleccionado.getFinReparacion());
         } else {
             finReparacion = null;
         }
-        
-        if(avisoSeleccionado.getPosGPS() != null && !avisoSeleccionado.getPosGPS().isEmpty()) {
+
+        if (avisoSeleccionado.getPosGPS() != null && !avisoSeleccionado.getPosGPS().isEmpty()) {
             String[] posGPS = avisoSeleccionado.getPosGPS().split(";");
             latitudGPS = posGPS[0];
             longitudGPS = posGPS[1];
@@ -154,43 +184,43 @@ public class AvisosBean {
             latitudGPS = null;
             longitudGPS = null;
         }
-        
+
         return "editarAviso";
     }
-    
+
     public String doGuardar() {
         if (avisoSeleccionado.getUbicacion() == null || avisoSeleccionado.getUbicacion().trim().isEmpty()) {
             error = "Ubicación inválida";
             return "editarAviso";
         }
-        
-        if(avisoSeleccionado.getEstado() == null || avisoSeleccionado.getEstado().trim().isEmpty()) {
+
+        if (avisoSeleccionado.getEstado() == null || avisoSeleccionado.getEstado().trim().isEmpty()) {
             error = "El campo estado no puede estar vacío";
             return "editarAviso";
         }
-        
+
         if (avisoSeleccionado.getObservaciones() == null || avisoSeleccionado.getObservaciones().trim().isEmpty()) {
             error = "El campo observaciones no puede estar vacío";
             return "editarAviso";
         }
-        
-        if(prioridad != null && !prioridad.trim().isEmpty()) {
+
+        if (prioridad != null && !prioridad.trim().isEmpty()) {
             try {
                 int num = Integer.parseInt(prioridad);
-                if(num < 1 || num > 9) {
+                if (num < 1 || num > 9) {
                     error = "La prioridad debe estar entre 1 y 9";
                     return "editarAviso";
                 }
                 avisoSeleccionado.setPrioridad(num);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 error = "La prioridad debe ser un número";
                 return "editarAviso";
             }
         } else {
             avisoSeleccionado.setPrioridad(null);
         }
-        
-        if(inicioReparacion != null && !inicioReparacion.trim().isEmpty()) {
+
+        if (inicioReparacion != null && !inicioReparacion.trim().isEmpty()) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
             formatter.applyPattern("dd-MM-yyyy");
             try {
@@ -202,8 +232,8 @@ public class AvisosBean {
         } else {
             avisoSeleccionado.setInicioReparacion(null);
         }
-        
-        if(finReparacion != null && !finReparacion.trim().isEmpty()) {
+
+        if (finReparacion != null && !finReparacion.trim().isEmpty()) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
             formatter.applyPattern("dd-MM-yyyy");
             try {
@@ -215,53 +245,53 @@ public class AvisosBean {
         } else {
             avisoSeleccionado.setFinReparacion(null);
         }
-        
-        if(latitudGPS != null && !latitudGPS.trim().isEmpty()) {
-            if(longitudGPS == null || longitudGPS.trim().isEmpty()) {
+
+        if (latitudGPS != null && !latitudGPS.trim().isEmpty()) {
+            if (longitudGPS == null || longitudGPS.trim().isEmpty()) {
                 error = "La longitud no puede estar vacía";
                 return "editarAviso";
-             }
-        } else if(longitudGPS != null && !longitudGPS.trim().isEmpty()) {
+            }
+        } else if (longitudGPS != null && !longitudGPS.trim().isEmpty()) {
             error = "La latitud no puede estar vacía";
             return "editarAviso";
         }
-        
-        if((latitudGPS != null && !latitudGPS.trim().isEmpty()) &&
-                longitudGPS != null && !longitudGPS.trim().isEmpty()) {
+
+        if ((latitudGPS != null && !latitudGPS.trim().isEmpty())
+                && longitudGPS != null && !longitudGPS.trim().isEmpty()) {
             try {
                 Double.parseDouble(longitudGPS);
                 Double.parseDouble(latitudGPS);
-                avisoSeleccionado.setPosGPS(latitudGPS+";"+longitudGPS);
-            } catch(NumberFormatException e) {
+                avisoSeleccionado.setPosGPS(latitudGPS + ";" + longitudGPS);
+            } catch (NumberFormatException e) {
                 error = "La latitud y longitud deben ser numéricos";
                 return "editarAviso";
             }
         } else {
             avisoSeleccionado.setPosGPS(null);
         }
-        
-        if(avisoSeleccionado.getId() == null) {
+
+        if (avisoSeleccionado.getId() == null) {
             avisoSeleccionado.setFechacreacion(new Date());
             avisoSeleccionado.setUsuarioemail(usuarioBean.getUsuario());
-            
+
             create(avisoSeleccionado);
         } else {
             edit(avisoSeleccionado);
         }
-        
+
         return "listaAvisos?faces-redirect=true";
     }
-    
+
     public String doBorrar(Aviso aviso) {
         remove(aviso);
         return "listaAvisos";
     }
-    
+
     public String doVer(Aviso aviso) {
         avisoSeleccionado = aviso;
         return "verAviso";
     }
-    
+
     public String verOperaciones(Aviso aviso) {
         avisoSeleccionado = aviso;
         return "listaOperaciones";
@@ -269,14 +299,14 @@ public class AvisosBean {
 
     private java.util.List<Aviso> findAll() {
         List<Aviso> listaAvisos = null;
-        
+
         Response r = avisoJersey.findAll(Response.class);
         if (r.getStatus() == 200) {
             GenericType<List<Aviso>> genericType = new GenericType<List<Aviso>>() {
             };
             listaAvisos = r.readEntity(genericType);
         }
-        
+
         return listaAvisos;
     }
 
@@ -285,10 +315,47 @@ public class AvisosBean {
     }
 
     private void remove(Aviso entity) {
-        avisoJersey.remove(""+entity.getId());
+        avisoJersey.remove("" + entity.getId());
     }
 
     private void edit(Aviso entity) {
         avisoJersey.edit_JSON(entity);
     }
+
+    private static double havershine(double lat1, double lon1, double lat2, double lon2) {
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        lat1 = Math.toRadians(lat1);
+        lat2 = Math.toRadians(lat2);
+
+        double a = Math.pow(Math.sin(dLat / 2), 2) + Math.pow(Math.sin(dLon / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        return R * c;
+    }
+
+    public void enRadio() {
+        avisosEnRadio = new ArrayList<>();
+        List<Aviso> listaAvisos = this.findAll();
+        for (Aviso aviso : listaAvisos) {
+
+            if (aviso.getPosGPS() != null && !aviso.getPosGPS().isEmpty()) {
+                String[] posGPS = aviso.getPosGPS().split(";");
+                double latitudGPSaviso = Double.parseDouble(posGPS[0]);
+                double longitudGPSaviso = Double.parseDouble(posGPS[1]);
+                double res = havershine(Double.parseDouble(latitudGPSOperador), Double.parseDouble(longitudGPSOperador), latitudGPSaviso, longitudGPSaviso);
+                if (res <= 10) {
+
+                    avisosEnRadio.add(aviso);
+
+                }
+
+            }
+        }
+
+    }
+
+    public String doMostrarAvisos() {
+        return "listaAvisos";
+    }
+
 }
