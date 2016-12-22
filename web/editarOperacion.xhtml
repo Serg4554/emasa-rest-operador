@@ -5,18 +5,28 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Editar operacion</title>
+        <link rel="stylesheet" type="text/css" href="style/style.css" />
     </h:head>
     <h:body>
-        <h:form>
-            <h:outputText id="error" style="color: red;" value="#{operacionesBean.error}" /> <br/>
+        <h:panelGroup layout="block" id="header">
+            <h:graphicImage value="images/emasa.png" height="30" id="headerLogo" />
+            <h:panelGroup layout="block" id="headerContent">
+                Panel operador
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup layout="block" id="content">
+            <h:form>
+                <h:outputText id="error" style="color: red;" value="#{operacionesBean.error}" /> <br/>
 
-            Descripción <h:inputText maxlength="500" value="#{operacionesBean.operacionSeleccionada.descripcion}" /> <br/>
-            Fecha
-            <h:inputText value="#{operacionesBean.fecha}" /> <br/>
-            <h:commandButton value="Guardar" action="#{operacionesBean.doGuardar()}">
-                <f:ajax execute="@form" render="error"/>
-            </h:commandButton>
-        </h:form>
+                Descripción <h:inputText maxlength="500" value="#{operacionesBean.operacionSeleccionada.descripcion}" /> <br/>
+                Fecha
+                <h:inputText value="#{operacionesBean.fecha}" /> <br/>
+                <h:commandButton value="Guardar" action="#{operacionesBean.doGuardar()}">
+                    <f:ajax execute="@form" render="error"/>
+                </h:commandButton>
+                <h:commandButton action="listaOperaciones?faces-redirect=true" value="Volver" />
+            </h:form>
+        </h:panelGroup>
     </h:body>
 </html>
 

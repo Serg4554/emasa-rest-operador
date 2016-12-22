@@ -4,13 +4,22 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Operacion #{operacionesBean.operacionSeleccionada.id}</title>
+        <link rel="stylesheet" type="text/css" href="style/style.css" />
     </h:head>
     <h:body>
-        <h:form>
-            Descripción: #{operacionesBean.operacionSeleccionada.descripcion} <br/>
-            Fecha: #{operacionesBean.fecha} <br/>
-            <h:commandButton action="#{operacionesBean.doVolver()}" value="Volver" />
-        </h:form>
+        <h:panelGroup layout="block" id="header">
+            <h:graphicImage value="images/emasa.png" height="30" id="headerLogo" />
+            <h:panelGroup layout="block" id="headerContent">
+                Panel operador
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup layout="block" id="content">
+            <h:form>
+                Descripción: #{operacionesBean.operacionSeleccionada.descripcion} <br/>
+                Fecha: #{operacionesBean.fecha} <br/>
+                <h:commandButton action="listaAvisos?faces-redirect=true" value="Volver" />
+            </h:form>
+        </h:panelGroup>
     </h:body>
 </html>
 
