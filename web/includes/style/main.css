@@ -11,6 +11,7 @@ html, body {
     background: #418BEA;
     border-bottom: 1px solid #3674c4;
     vertical-align: middle;
+    z-index: 100;
 }
 
 #headerLogo {
