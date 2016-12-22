@@ -11,7 +11,10 @@
             <h:outputText id="error" style="color: red;" value="#{operacionesBean.error}" /> <br/>
 
             Descripción <h:inputText maxlength="500" value="#{operacionesBean.operacionSeleccionada.descripcion}" /> <br/>
-            Fecha <h:inputText value="#{operacionesBean.fecha}" /> <br/>
+            Fecha
+            <h:inputText value="#{operacionesBean.fecha}">
+                <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET" />
+            </h:inputText> <br/>
             <h:commandButton value="Guardar" action="#{operacionesBean.doGuardar()}">
                 <f:ajax execute="@form" render="error"/>
             </h:commandButton>

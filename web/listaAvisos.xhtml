@@ -21,7 +21,7 @@
                             <h:outputText value="Fecha creación"/>
                         </f:facet>
                         <h:outputText value="#{aviso.fechacreacion}">
-                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET" />
                         </h:outputText>
                     </h:column>
                     <h:column>
@@ -59,7 +59,7 @@
                             <h:outputText value="Inicio reparación"/>
                         </f:facet>
                         <h:outputText value="#{aviso.inicioReparacion}">
-                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET" />
                         </h:outputText>
                     </h:column>
                     <h:column>
@@ -67,7 +67,7 @@
                             <h:outputText value="Fin reparación"/>
                         </f:facet>
                         <h:outputText value="#{aviso.finReparacion}">
-                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET" />
                         </h:outputText>
                     </h:column>
                     <h:column>

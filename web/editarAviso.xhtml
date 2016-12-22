@@ -16,8 +16,14 @@
             Observaciones <h:inputText maxlength="10000" value="#{avisosBean.avisoSeleccionado.observaciones}" /> <br/>
             Ubicación técnica <h:inputText maxlength="1000" value="#{avisosBean.avisoSeleccionado.ubicacionTecnica}" /> <br/>
             Prioridad <h:inputText maxlength="1" value="#{avisosBean.prioridad}" /> <br/>
-            Inicio reparación <h:inputText value="#{avisosBean.inicioReparacion}" /> <br/>
-            Fin reparación <h:inputText value="#{avisosBean.finReparacion}" /> <br/>
+            Inicio reparación
+            <h:inputText value="#{avisosBean.inicioReparacion}">
+                <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET" />
+            </h:inputText> <br/>
+            Fin reparación
+            <h:inputText value="#{avisosBean.finReparacion}">
+                <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET" />
+            </h:inputText> <br/>
             Posición GPS
             <h:inputText a:placeholder="Latitud" value="#{avisosBean.latitudGPS}" />
             <h:inputText a:placeholder="Longitud" value="#{avisosBean.longitudGPS}" /> <br/>
