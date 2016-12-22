@@ -8,7 +8,6 @@ package bean;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,13 +17,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.ws.WebServiceRef;
 import jersey.OperacionJersey;
 import rest.ejb.Aviso;
 import rest.ejb.Operacion;
-import rest.ejb.Usuario;
 
 /**
  *

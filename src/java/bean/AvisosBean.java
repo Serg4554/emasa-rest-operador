@@ -17,7 +17,6 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import jersey.AvisoJersey;
 import rest.ejb.Aviso;
-import rest.ejb.Operacion;
 
 /**
  *
