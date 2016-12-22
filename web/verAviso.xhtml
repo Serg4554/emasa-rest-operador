@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Aviso #{avisosBean.avisoSeleccionado.id}</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            ID: #{avisosBean.avisoSeleccionado.id}
+            Ubicación: #{avisosBean.avisoSeleccionado.ubicacion} <br/>
+            Estado: #{avisosBean.avisoSeleccionado.estado} <br/>
+            Observaciones: #{avisosBean.avisoSeleccionado.observaciones}<br/>
+            Ubicación técnica: #{avisosBean.avisoSeleccionado.ubicacionTecnica} <br/>
+            Prioridad: #{avisosBean.prioridad} <br/>
+            Inicio reparación: #{avisosBean.inicioReparacion} <br/>
+            Fin reparación: #{avisosBean.finReparacion} <br/>
+            Posición GPS:
+            #{avisosBean.latitudGPS} ; 
+            #{avisosBean.longitudGPS} <br/>
+            Tipo: #{avisosBean.avisoSeleccionado.tipo} <br/>
+            <h:commandButton action="#{avisosBean.doVolver()}" value="Volver" />
+        </h:form>
+    </h:body>
+</html>
+

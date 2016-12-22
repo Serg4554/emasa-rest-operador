@@ -258,6 +258,15 @@ public class AvisosBean {
         return "listaAvisos";
     }
     
+    public String doVer(Aviso aviso) {
+        avisoSeleccionado = aviso;
+        return "verAviso";
+    }
+    
+    public String doVolver() {
+        return "listaAvisos";
+    }
+    
     public String verOperaciones(Aviso aviso) {
         avisoSeleccionado = aviso;
         return "listaOperaciones";

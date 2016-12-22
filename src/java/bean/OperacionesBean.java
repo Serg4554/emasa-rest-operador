@@ -88,6 +88,15 @@ public class OperacionesBean {
         this.avisosBean = avisosBean;
     }
     
+    public String doVer(Operacion operacion) {
+        this.operacionSeleccionada = operacion;
+        return "verOperacion";
+    }
+    
+    public String doVolver() {
+        return "listaOperaciones";
+    }
+    
     public String doCrear() {
         error = "";
         operacionSeleccionada = new Operacion();
