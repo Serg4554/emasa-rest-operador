@@ -39,6 +39,7 @@
                 </h:outputText> <br/>
                 <b>Posición GPS:</b> #{avisosBean.avisoSeleccionado.posGPS} <br/>
                 <b>Tipo:</b> #{avisosBean.avisoSeleccionado.tipo} <br/>
+                <h:commandButton action="listaAvisos?faces-redirect=true" value="Volver" class="btn btn-default" />
                 <h:panelGroup layout="block" rendered="${not empty avisosBean.avisoSeleccionado.posGPS}">
                     <h3>Mapa</h3>
                     <script type="text/javascript"
@@ -54,7 +55,6 @@
                     </h:form>
                 </h:panelGroup>
                 <br/>
-                <h:commandButton action="listaAvisos?faces-redirect=true" value="Volver" class="btn btn-default" />
             </h:form>
         </h:panelGroup>
     </h:body>

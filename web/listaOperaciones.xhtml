@@ -16,11 +16,12 @@
         <script src="https://use.fontawesome.com/26be38d20f.js"></script>
     </h:head>
     <h:body>
+        #{operacionesBean.actualizar()}
         <ui:include src="/includes/header.xhtml" />
         <h:panelGroup layout="block" id="content">
             <f:view>
                 <h:form>
-                    <h:dataTable class="table" value="#{operacionesBean.getListaOperaciones(avisosBean.avisoSeleccionado)}" var="operacion" border="1">
+                    <h:dataTable class="table" value="#{operacionesBean.listaOperaciones}" var="operacion" border="1">
                         <h:column headerClass="tableHeader">
                             <f:facet name="header">
                                 <h:outputText value="ID"/>

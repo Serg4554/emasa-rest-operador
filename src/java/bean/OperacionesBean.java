@@ -7,6 +7,7 @@ package bean;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,6 +39,15 @@ public class OperacionesBean {
     private String error;
     private Operacion operacionSeleccionada;
     private String fecha;
+    private List<Operacion> listaOperaciones;
+
+    public List<Operacion> getListaOperaciones() {
+        return listaOperaciones;
+    }
+
+    public void setListaOperaciones(List<Operacion> listaOperaciones) {
+        this.listaOperaciones = listaOperaciones;
+    }
 
     /**
      * Creates a new instance of listaOperacionesBean
@@ -49,6 +59,10 @@ public class OperacionesBean {
     public void init() {
         operacionJersey = new OperacionJersey();
         error = "";
+    }
+    
+    public void actualizar() {
+        listaOperaciones = this.getListaOperaciones(avisosBean.getAvisoSeleccionado());
     }
 
     public String getError() {
@@ -85,18 +99,18 @@ public class OperacionesBean {
     
     public String doVer(Operacion operacion) {
         this.operacionSeleccionada = operacion;
-        return "verOperacion";
+        return "verOperacion?faces-redirect=true";
     }
     
     public String doVolver() {
-        return "listaOperaciones";
+        return "listaOperaciones?faces-redirect=true";
     }
     
     public String doCrear() {
         error = "";
         operacionSeleccionada = new Operacion();
         fecha = null;
-        return "editarOperacion";
+        return "editarOperacion?faces-redirect=true";
     }
     
     public String doEditar(Operacion operacion) {
@@ -111,13 +125,14 @@ public class OperacionesBean {
         } else {
             fecha = null;
         }
-        return "editarOperacion";
+        return "editarOperacion?faces-redirect=true";
     }
     
     public String doGuardar() {
         if(operacionSeleccionada.getDescripcion() == null || operacionSeleccionada.getDescripcion().trim().isEmpty()) {
             error = "La descripción no puede estar vacía";
-            return "editarOperacion";
+            
+            return "editarOperacion?faces-redirect=true";
         }
         
         if(fecha != null && !fecha.trim().isEmpty()) {
@@ -132,7 +147,7 @@ public class OperacionesBean {
             }
         } else {
             error = "La fecha no puede estar vacía";
-            return "editarOperacion";
+            return "editarOperacion?faces-redirect=true";
         }
         
         if(operacionSeleccionada.getId() == null) {
@@ -143,13 +158,14 @@ public class OperacionesBean {
         } else {
             edit(operacionSeleccionada);
         }
-        
-        return "listaOperaciones";
+        listaOperaciones = this.getListaOperaciones(avisosBean.getAvisoSeleccionado());
+        return "listaOperaciones?faces-redirect=true";
     }
 
     public String doBorrar(Operacion operacion) {
         remove(operacion);
-        return "listaOperaciones";
+        listaOperaciones = this.getListaOperaciones(avisosBean.getAvisoSeleccionado());
+        return "listaOperaciones?faces-redirect=true";
     }
     
     private java.util.List<Operacion> findListaOperaciones(int id) {

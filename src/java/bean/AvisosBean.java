@@ -75,7 +75,6 @@ public class AvisosBean {
 
     @PostConstruct
     public void init() {
-        
         avisoJersey = new AvisoJersey();
         error = "";
     }
@@ -289,12 +288,12 @@ public class AvisosBean {
 
     public String doVer(Aviso aviso) {
         avisoSeleccionado = aviso;
-        return "verAviso";
+        return "verAviso?faces-redirect=true";
     }
 
     public String verOperaciones(Aviso aviso) {
         avisoSeleccionado = aviso;
-        return "listaOperaciones";
+        return "listaOperaciones?faces-redirect=true";
     }
 
     private java.util.List<Aviso> findAll() {
@@ -355,6 +354,7 @@ public class AvisosBean {
     }
 
     public String doMostrarAvisos() {
+        enRadio();
         return "listaAvisos";
     }
 
